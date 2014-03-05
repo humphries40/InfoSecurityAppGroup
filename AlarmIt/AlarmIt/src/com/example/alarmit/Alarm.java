@@ -11,10 +11,13 @@ import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 
+
+
 public class Alarm extends Activity {
 
 	MediaPlayer mp;
 	int volume_level;
+	static final int REQUEST_IMAGE_CAPTURE = 1; //Part of the Camera taking Process
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +60,15 @@ public class Alarm extends Activity {
         // Do something in response to button
     	Intent intent = new Intent(this, HomeScreen.class);
     	startActivity(intent);
+    }
+    
+    
+    //Takes a Picture with the Camera
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        }
     }
 
 }
